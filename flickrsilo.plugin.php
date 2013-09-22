@@ -879,7 +879,7 @@ class FlickrSilo extends Plugin implements MediaSilo
 			$flickr = new Flickr(  $this->params );
 			$_SESSION['flickr_frob'] = '' . $flickr->getFrob();
 			$auth_url = $flickr->authLink( $_SESSION['flickr_frob'] );
-			$confirm_url = URL::get( 'admin', array( 'page' => 'plugins', 'configure' => $this->plugin_id(), 'configaction' => 'confirm' ) ) . '#plugin_options';
+			$confirm_url = URL::get( 'display_plugins', array( 'page' => 'plugins', 'configure' => $this->plugin_id, 'action' => 'confirm') );
 			echo '<p>' . _t( 'To use this plugin, you must <a href="%1$s">authorize Habari to access your Flickr account</a>.', array( $auth_url ) ) . '</p>';
 			echo '<p>' . _t( 'When you have completed the authorization on Flickr, return here and <a href="%1$s">confirm that the authorization was successful</a>.', array( $confirm_url ) ) . '</p>';
 		}
@@ -891,7 +891,6 @@ class FlickrSilo extends Plugin implements MediaSilo
 	 */
 	public function action_plugin_ui_confirm()
 	{
-
 		$flickr = new Flickr(  $this->params );
 		if ( !isset( $_SESSION['flickr_frob'] ) ){
 			$auth_url = URL::get( 'admin', array( 'page' => 'plugins', 'configure' => $this->plugin_id(), 'configaction' => 'authorize' ) ) . '#plugin_options';
