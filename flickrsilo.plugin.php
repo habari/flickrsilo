@@ -78,7 +78,7 @@ class flickrAPI
 			
 		$response = $call->get_response_body();
 		try{
-			$xml = new SimpleXMLElement( $response );
+			$xml = new \SimpleXMLElement( $response );
 			return $xml;
 		}
 		catch( \Exception $e ) {
